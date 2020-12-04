@@ -8,18 +8,16 @@ const input = prepareInput(readInput())
 
 // By calculating the index with modulo, the pattern starts again if
 // the last element of a row is reached
-const checkSlope = (right, down, grid) => {
-  // returns an array of booleans
-  const treesInSlope = grid.map((mapRow, rowIdx) =>
-    rowIdx % down === 0
-      ? mapRow[((rowIdx / down) * right) % mapRow.length] === '#'
-      : false
-  )
-  return treesInSlope.reduce(
-    (numOfTrees, rowHasTree) => (rowHasTree ? numOfTrees + 1 : numOfTrees),
-    0
-  )
-}
+const checkForTree = (right, down) => (mapRow, rowIdx) =>
+  rowIdx % down === 0
+    ? mapRow[((rowIdx / down) * right) % mapRow.length] === '#'
+    : false
+
+const countTreeHits = (numOfTrees, rowHasTree) =>
+  rowHasTree ? numOfTrees + 1 : numOfTrees
+
+const checkSlope = (right, down, grid) =>
+  grid.map(checkForTree(right, down)).reduce(countTreeHits, 0)
 
 const goA = (input) => {
   return checkSlope(3, 1, input)
