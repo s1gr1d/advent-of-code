@@ -1,4 +1,6 @@
-# Advent of Code 2020
+# 🎄 Advent of Code 2020
+
+I solve the avent of code puzzles with JS in a functional programming style.
 
 ## Intro
 
